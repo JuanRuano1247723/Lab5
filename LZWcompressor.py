@@ -8,6 +8,7 @@ class LZWcompressor():
             # Crear el diccionario inicial con todos los caracteres únicos
             diccionario = {chr(i): i for i in range(256)}  # Códigos de 0 a 255 para caracteres ASCII
             código_actual = 256  # Siguiente código disponible
+            max_codigos = 512
 
             # Variables de estado
             W = ""
@@ -23,8 +24,9 @@ class LZWcompressor():
                     resultado.append(diccionario[W])
 
                     # Agregar W + C al diccionario
-                    diccionario[WC] = código_actual
-                    código_actual += 1
+                    if código_actual < max_codigos:
+                        diccionario[WC] = código_actual
+                        código_actual += 1
 
                     # Establecer W como el nuevo símbolo actual
                     W = C
@@ -46,8 +48,7 @@ class LZWcompressor():
     def save_compressed_to_lzw(self, compressed_data, original_file_path):
             try:
                 # Determinar la cantidad mínima de bits necesarios para representar los códigos
-                max_code = max(compressed_data)
-                bit_length = max_code.bit_length()  # Número de bits necesarios
+                bit_length = 9  # Número de bits necesarios
 
                 # Crear el nuevo nombre de archivo con extensión .lzw
                 new_file_path = original_file_path.replace(".txt", ".lzw")
