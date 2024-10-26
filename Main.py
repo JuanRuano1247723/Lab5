@@ -1,5 +1,7 @@
 import os
+import time
 from LZWcompressor import LZWcompressor
+from log import Log
 from LZWdescompressor import LZWdescompressor
 
 def leer_archivo(ruta):
@@ -15,7 +17,9 @@ def leer_archivo(ruta):
 
 def menu():
     compressor = LZWcompressor()
+    logger = Log()
     descompressor = LZWdescompressor()
+
     while True:
         print("\n--- Menú ---")
         print("1. Leer archivo .txt")
@@ -30,8 +34,23 @@ def menu():
                 leer_archivo(ruta)
             else:
                 print("\nError: Ruta inválida o el archivo no es un .txt.")
+            #Compresión
+            # Incio del tiempo     
+            start_time = time.perf_counter()
             compressed_data = compressor.lzw_compressn_from_file(ruta)
+            # Finalización del tiempo y calculo en microsegundos
+            time_us = (time.perf_counter() - start_time) * 1_000_000  
+            
             if compressed_data is not None:
+                compressed_size = len(compressed_data) * 9 
+                # Incio del tiempo     
+                start_total_time = time.perf_counter()
+                # Guardar el archivo comprimido y capturar el índice máximo usado en el diccionario
+                max_code = compressor.save_compressed_to_lzw(compressed_data, ruta)
+                # Finalización del tiempo y calculo en microsegundos
+                total_time_us = ((time_us/1_000_000) + (time.perf_counter() - start_time)) * 1_000_000 
+                # Log de compresión
+                logger.log_compression(ruta, compressed_size, time_us, total_time_us, max_code)
                 compressor.save_compressed_to_lzw(compressed_data, ruta)
 
         elif opcion == '2':
@@ -48,7 +67,6 @@ def menu():
 
             else:
                 print("Error: El archivo debe existir y tener la extensión .lzw.")
-
 
         elif opcion == '3':
             print("\nSaliendo del programa...")
