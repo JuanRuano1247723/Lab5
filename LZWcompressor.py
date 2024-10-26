@@ -61,6 +61,7 @@ class LZWcompressor():
                     for code in compressed_data:
                         # Convertir el código a su representación binaria con la longitud mínima
                         code_bits = format(code, f'0{bit_length}b')
+                        
 
                         # Añadir cada bit al byte actual
                         for bit in code_bits:
@@ -79,7 +80,10 @@ class LZWcompressor():
                         current_byte <<= (8 - bits_filled)
                         file.write(bytes([current_byte]))  # Escribir el último byte
 
+
+                # Mostrar los códigos binarios generados
                 print(f"Archivo comprimido guardado como {new_file_path}")
+                return max_code
 
             except Exception as e:
                 print(f"Error al guardar el archivo comprimido: {e}")
