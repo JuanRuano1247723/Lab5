@@ -1,6 +1,5 @@
 import os
-
-from Lab5.LZWcompressor import LZWCompressor
+from LZWcompressor import LZWcompressor
 
 def leer_archivo(ruta):
     try:
@@ -14,7 +13,7 @@ def leer_archivo(ruta):
         print(f"\nError al leer el archivo: {e}")
 
 def menu():
-    compressor = LZWCompressor()
+    compressor = LZWcompressor()
     while True:
         print("\n--- Menú ---")
         print("1. Leer archivo .txt")
@@ -28,11 +27,11 @@ def menu():
                 leer_archivo(ruta)
             else:
                 print("\nError: Ruta inválida o el archivo no es un .txt.")
-            compressed_data = compressor.compress_file(ruta)
-            if compressed_data:
-                print(f"\nDatos comprimidos: {compressed_data}")
-        elif opcion == '2':
-            print("\nSaliendo del programa...")
+            compressed_data = compressor.lzw_compressn_from_file(ruta)
+            if compressed_data is not None:
+                compressor.save_compressed_to_lzw(compressed_data, ruta)
+            elif opcion == '2':
+                print("\nSaliendo del programa...")
             break
         else:
             print("\nOpción no válida. Inténtalo de nuevo.")
