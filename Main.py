@@ -1,5 +1,6 @@
 import os
 from LZWcompressor import LZWcompressor
+from LZWdescompressor import LZWdescompressor
 
 def leer_archivo(ruta):
     try:
@@ -14,10 +15,12 @@ def leer_archivo(ruta):
 
 def menu():
     compressor = LZWcompressor()
+    descompressor = LZWdescompressor()
     while True:
         print("\n--- Menú ---")
         print("1. Leer archivo .txt")
-        print("2. Salir")
+        print("2. Descomprimir archivo .txt")
+        print("3. Salir")
         
         opcion = input("Elige una opción: ")
 
@@ -30,8 +33,25 @@ def menu():
             compressed_data = compressor.lzw_compressn_from_file(ruta)
             if compressed_data is not None:
                 compressor.save_compressed_to_lzw(compressed_data, ruta)
-            elif opcion == '2':
-                print("\nSaliendo del programa...")
+
+        elif opcion == '2':
+            archivo_lzw = input("Ingrese la ruta del archivo .lzw: ")
+
+            if os.path.isfile(archivo_lzw) and archivo_lzw.endswith('.lzw'):
+
+                nombre_del_archivo = os.path.splitext(archivo_lzw)[0]
+
+                output_file = nombre_del_archivo + 'descomprimido.txt'
+
+                descompressor.descomprimir(archivo_lzw, output_file)
+                print(f"Archivo descomprimido guardado como: {output_file}")
+
+            else:
+                print("Error: El archivo debe existir y tener la extensión .lzw.")
+
+
+        elif opcion == '3':
+            print("\nSaliendo del programa...")
             break
         else:
             print("\nOpción no válida. Inténtalo de nuevo.")
