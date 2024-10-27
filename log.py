@@ -1,7 +1,7 @@
 import os
 
 class Log:
-    def __init__(self, log_file_path="compression_log.txt"):
+    def __init__(self, log_file_path="compresion-descompresion_log.txt"):
         # Inicializa la clase Log con el nombre del archivo de log, usando un valor predeterminado.
         self.log_file_path = log_file_path
 
@@ -22,8 +22,8 @@ class Log:
             log_file.write(f"Tamanio original (bits): {original_size}\n")
             log_file.write(f"Tamanio comprimido (bits): {compressed_size}\n")
             log_file.write(f"Tasa de compresion: {tasa:.2f}\n")
-            log_file.write(f"Tiempo de operacion: {time:.2f}  micro-segundos\n")
-            log_file.write(f"Tiempo total de operacion (desde compresion hasta creacion de archivo): {total_time:.2f}  micro-segundos\n")
+            log_file.write(f"Tiempo de operacion: {time:.3f}  milisegundos\n")
+            log_file.write(f"Tiempo total de operacion (desde compresion hasta creacion de archivo): {total_time:.3f}  milisegundos\n")
             log_file.write(f"Dictionary Max Index Used: {max_code}\n")
             log_file.write("\n")
 
@@ -31,11 +31,11 @@ class Log:
         # Registra los detalles de la descompresión en el archivo de log.
         
         with open(self.log_file_path, 'a') as log_file:
-            log_file.write("=== DECOMPRESION ===\n")
+            log_file.write("=== DESCOMPRESION ===\n")
              # Escribe los detalles de la descompresión en el archivo de log.
             log_file.write(f"Archivo ingresado: {compressed_file}\n")
             log_file.write(f"Archivo descomprimido: {decompressed_file}\n")
-            log_file.write(f"Tiempo de operacion: {time:.2f} micro-segundos\n")
+            log_file.write(f"Tiempo de operacion: {time:.3f} milisegundos\n")
             log_file.write(f"Dictionary Max Index Used: {max_code}\n")
             log_file.write("\n")
 

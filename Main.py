@@ -23,7 +23,7 @@ def menu():
     while True:
         print("\n--- Menú ---")
         print("1. Leer archivo .txt")
-        print("2. Descomprimir archivo .txt")
+        print("2. Descomprimir archivo .lzw")
         print("3. Salir")
         
         opcion = input("Elige una opción: ")
@@ -39,7 +39,7 @@ def menu():
             start_time = time.perf_counter()
             compressed_data = compressor.lzw_compressn_from_file(ruta)
             # Finalización del tiempo y calculo en microsegundos
-            time_us = (time.perf_counter() - start_time) * 1_000_000  
+            time_us = (time.perf_counter() - start_time) * 1_000
             
             if compressed_data is not None:
 
@@ -48,7 +48,7 @@ def menu():
                 # Guardar el archivo comprimido y capturar el índice máximo usado en el diccionario
                 compressor.save_compressed_to_lzw(compressed_data, ruta)
                 # Finalización del tiempo y calculo en microsegundos
-                total_time_us = ((time_us/1_000_000) + (time.perf_counter() - start_time)) * 1_000_000 
+                total_time_us = ((time_us/1_000) + (time.perf_counter() - start_time)) * 1_000 
                 
                 compressed_size = len(compressed_data) * 9 
                 max_code = max(compressed_data)
@@ -68,7 +68,7 @@ def menu():
                 # Descompresión
                 descompressor.descomprimir(archivo_lzw, output_file)
                 # Finalización del tiempo y calculo en microsegundos
-                time_dc = (time.perf_counter() - start_time_dc) * 1_000_000  
+                time_dc = (time.perf_counter() - start_time_dc) * 1_000  
                 # Obtener el índice máximo usado en el diccionario
                 max_code_used = descompressor.descomprimir(archivo_lzw, output_file)
                 # Log de descompresión
