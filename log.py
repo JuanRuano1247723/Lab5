@@ -23,7 +23,7 @@ class Log:
             log_file.write(f"Tamanio comprimido (bits): {compressed_size}\n")
             log_file.write(f"Tasa de compresion: {tasa:.2f}\n")
             log_file.write(f"Tiempo de operacion: {time:.2f}  micro-segundos\n")
-            log_file.write(f"Tiempo total de operacion (crear archivo): {total_time:.2f}  micro-segundos\n")
+            log_file.write(f"Tiempo total de operacion (desde compresion hasta creacion de archivo): {total_time:.2f}  micro-segundos\n")
             log_file.write(f"Dictionary Max Index Used: {max_code}\n")
             log_file.write("\n")
 

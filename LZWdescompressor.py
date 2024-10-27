@@ -64,6 +64,11 @@ class LZWdescompressor():
 
         # Unir el resultado y escribirlo en el archivo de salida
         descompressed_content = ''.join(result)
+        max_code_used = max(compressed_data) if compressed_data else 0
+        
+        return max_code_used
+        
 
         with open(descompressed_file, 'w', encoding='utf-8') as output:
             output.write(descompressed_content)
+            

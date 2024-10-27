@@ -34,7 +34,7 @@ class LZWcompressor():
             # Emitir el último código de W
             if W:
                 resultado.append(diccionario[W])
-
+            
             # Retornar los códigos comprimidos
             return resultado
 
@@ -84,7 +84,7 @@ class LZWcompressor():
 
                 # Mostrar los códigos binarios generados
                 print(f"Archivo comprimido guardado como {new_file_path}")
-                return max_code
+                
 
             except Exception as e:
                 print(f"Error al guardar el archivo comprimido: {e}")
