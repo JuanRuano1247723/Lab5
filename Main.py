@@ -67,7 +67,7 @@ def menu():
                 start_time_dc = time.perf_counter()
                 # Descompresión
                 descompressor.descomprimir(archivo_lzw, output_file)
-                # Finalización del tiempo y calc2ulo en microsegundos
+                # Finalización del tiempo y calculo en microsegundos
                 time_dc = (time.perf_counter() - start_time_dc) * 1_000_000  
                 # Obtener el índice máximo usado en el diccionario
                 max_code_used = descompressor.descomprimir(archivo_lzw, output_file)

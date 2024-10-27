@@ -17,7 +17,7 @@ class Log:
             tasa = (original_size/compressed_size) 
             # Escribe los detalles de la compresión en el archivo de log.
             log_file.write("=== COMPRESION ===\n")
-            log_file.write(f"Arhivo original: {file_path}\n")
+            log_file.write(f"Archivo original: {file_path}\n")
             log_file.write(f"Archivo comprimido: {compressed_file_path}\n")
             log_file.write(f"Tamanio original (bits): {original_size}\n")
             log_file.write(f"Tamanio comprimido (bits): {compressed_size}\n")
